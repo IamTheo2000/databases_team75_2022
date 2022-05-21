@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Vaseis</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <!-- Section of class login-dark located in assets -->
+    <section class="login-dark">
+        <!-- Navigation bar of certain class with certain color and two buttons
+            Unitag button takes user to dashboard
+            Logout button that user logs out-->
+        <nav class="navbar navbar-light navbar-expand-md fixed-top" style="background: #1e2833;border-bottom: 1px solid rgb(255,255,255);font-size: 24px;">
+            <div class="container-fluid"><a class="navbar-brand" href="/dashboard" style="color: rgba(255,255,255,0.9);font-size: 30px;">Unitag</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-2">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" id="logout_button" href="/logout" style="color: rgba(255,255,255,0.9);font-size: 30px;">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Form tha contains some options(divs). Each one contains a header, some text and a "Go" button
+            Two use cases: sum due and reports
+            When "Go" button is clicked link to corresponding page-->
+        <form method="post" style="max-width: 1102px;width: 600px;">
+            <div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center" style="width: 700px;">
+                <h1 style="width: 520px;">Choose use case:</h1>
+            </div>
+            <div class="row">
+                <div class="col text-center" style="padding: 15px;width: 10px;">
+                    <div class="text-center" style="padding: 15px;width: 230px;height: 230px;background: rgb(30,52,77);border-radius: 15px;"><i class="fa fa-calendar" style="padding: 10px;"></i>
+                        <h1 style="font-size: 25px;padding: 10px;padding-bottom: 0px;">Sum due</h1>
+                        <p style="color: rgba(255,255,255,0.45);font-size: 13px;padding: 10px;height: 79px;padding-top: 0px;"><br>Calculate debts between operators.<br><br></p><a href="/sumdue" style="font-size: 15px;">Go &gt;&gt;</a>
+                    </div>
+                </div>
+                
+                <div class="col text-center" style="width: 10px;padding: 15px;">
+                    <div style="padding: 15px;width: 230px;height: 230px;background: rgb(30,52,77);border-radius: 15px;"><i class="fa fa-bar-chart" style="padding: 10px;"></i>
+                        <h1 style="font-size: 25px;padding: 10px;padding-bottom: 0px;">Reports</h1>
+                        <p style="color: rgba(255,255,255,0.45);font-size: 13px;padding: -1px;height: 75px;"><br>Analyse passes with graphs, tables and others.<br><br><br></p><a href="/reports" style="font-size: 15px;">Go &gt;&gt;</a>
+                    </div>
+                </div>
+               <!-- <div class="col text-center" style="width: 10px;padding: 15px;">
+                    <div style="width: 230px;height: 230px;padding: 15px;background: rgb(30,52,77);border-radius: 15px;"><i class="fa fa-exchange" style="padding: 10px;"></i>
+                        <h1 style="font-size: 25px;padding: 10px;padding-bottom: 0px;">Admin</h1>
+                        <p style="color: rgba(255,255,255,0.45);font-size: 13px;padding: 10px;height: 77px;padding-top: 0px;padding-bottom: 10px;"><br>Check database connectivity, reset stations, passes or vehicles.<br><br></p><a href="/admin" style="font-size: 15px;">Go &gt;&gt;</a>
+                    </div>
+                </div> -->
+            </div>
+            </div>
+        </form>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
