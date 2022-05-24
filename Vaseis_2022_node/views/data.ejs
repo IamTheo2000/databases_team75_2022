@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Vaseis</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Features-Boxed.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+
+<body>
+    <!-- Section of class login-dark located in assets -->
+    <section class="login-dark">
+        <%- include("navbar.ejs")%>
+
+        <!-- form with custom width given when page was rendered -->
+        <form method="post" style="max-width: fit-content;margin-top: 70px;">
+            <!-- back button -->
+            <button class="btn btn-primary" style="margin-top: 0px;background: rgb(30,40,51)" type="button" onclick="history.back()"><i class="fa fa-arrow-left"></i> Back</button>
+
+            <!-- displayed message: Showing result for + a string given from page render -->
+            <div class="text-center">
+                <h1><%= result_string %></h1>
+            </div> 
+            <% if (search_field) {%>
+                <div class="contaier">
+                    <div class="row">
+                        <div class="col-md-3" style="padding: 10px;"><input placeholder="yyy-mm-dd" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input1"></div>
+                        <div class="col-md-3" style="padding: 10px;"><input placeholder="Duration (Years)" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input2"></div>
+                        <div class="col-md-3" style="padding: 10px;"><input placeholder="Executive ID" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input3"></div>
+                        <div class="col-md-3" style="padding: 10px;"><button class="btn btn-primary" type="submit" style="box-shadow: inset -2px -2px rgba(8,20,50,0.83);background: rgb(46,65,102);padding: 17px;border-radius: 10px;width:100px">Search</button></div>
+                    </div>
+                </div>
+                    <% } %>      
+            <div class="scroll">
+            <table>
+                <thead style="position: sticky; top: 0; background: #304051;">
+                    <tr>
+                        <% for(var j=0; j < display_data_keys.length; j++) { %>
+                                    <th><%= display_data_keys[j] %></th>
+                        <% } %>
+                    </tr>
+                </thead>
+                    <!-- for every element in the list of jsons 
+                        create a table row with it's values-->
+                    <% for(var l=0; l < display_data.length; l++ ) { %>
+                        <tr>
+                        <% for(var k=0; k < display_data_keys.length; k++) {%>
+                            <% if (display_data_keys[k] == "start_date" || display_data_keys[k] == "end_date")  {%>
+                                <% if (display_data[l][display_data_keys[k]])  {%>
+                                        <td><%= display_data[l][display_data_keys[k]].getDate() + '/'
+                                            + (display_data[l][display_data_keys[k]].getMonth() + 1) + '/'
+                                            + display_data[l][display_data_keys[k]].getFullYear()%></td>
+                                    <% } else { %>
+                                        <td> - </td>
+                                    <% } %>
+                                <% } else { %>        
+                                <td><%= display_data[l][display_data_keys[k]] %></td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        <% } %>
+            </table>
+            </div>
+        </form>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

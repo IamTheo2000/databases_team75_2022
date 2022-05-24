@@ -1,3 +1,4 @@
+const flash = require("connect-flash/lib/flash");
 var express = require("express");
 const session = require('express-session');
 
@@ -9,9 +10,20 @@ app.set("views","./views");
 app.set("view engine","ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended :true}));
+app.use(flash());
+app.use(session({
+    secret: "ThisShouldBeSecret",
+    resave: false,
+    saveUninitialized: false,
+}));
 
-const dashboard = require('./controllers/dashboard');
+const dashboard = require('./routes/dashboard');
+const programs = require('./routes/programs');
+const projects = require('./routes/projects');
 
 app.use('/', dashboard);
+app.use('/programs', programs);
+app.use('/projects', projects);
 
+app.use((req,res,next) => {res.status(404).render('404.ejs')});
 module.exports = app;
