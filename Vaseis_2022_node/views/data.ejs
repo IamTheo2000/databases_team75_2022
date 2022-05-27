@@ -19,7 +19,7 @@
         <%- include("navbar.ejs")%>
 
         <!-- form with custom width given when page was rendered -->
-        <form method="post" style="max-width: fit-content;margin-top: 70px;">
+        <form method="post" style="padding: 20px;max-width:fit-content;width: fit-content;margin-right: 70px;">
             <!-- back button -->
             <button class="btn btn-primary" style="margin-top: 0px;background: rgb(30,40,51)" type="button" onclick="history.back()"><i class="fa fa-arrow-left"></i> Back</button>
 
@@ -27,19 +27,19 @@
             <div class="text-center">
                 <h1><%= result_string %></h1>
             </div> 
-            <% if (search_field) {%>
+            <% if (search_field) { %>
                 <div class="contaier">
                     <div class="row">
-                        <div class="col-md-3" style="padding: 10px;"><input placeholder="yyy-mm-dd" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input1"></div>
-                        <div class="col-md-3" style="padding: 10px;"><input placeholder="Duration (Years)" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input2"></div>
-                        <div class="col-md-3" style="padding: 10px;"><input placeholder="Executive ID" class="form-control" type="text" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);width: 313px;transform: perspective(0px);" name="input3"></div>
-                        <div class="col-md-3" style="padding: 10px;"><button class="btn btn-primary" type="submit" style="box-shadow: inset -2px -2px rgba(8,20,50,0.83);background: rgb(46,65,102);padding: 17px;border-radius: 10px;width:100px">Search</button></div>
+                        <div class="col" style="padding: 10px;"><input class="form-control" type="date" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);transform: perspective(0px);" name="input1"></div>
+                        <div class="col" style="padding: 10px;"><input placeholder="Duration (Months)" class="form-control" type="number" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);transform: perspective(0px);" min="0" oninput="this.value = Math.abs(this.value)" onfocusout="clearinput()" id="input2" name="input2"></div>
+                        <div class="col" style="padding: 10px;"><input placeholder="Executive ID" class="form-control" type="number" style="font-size: 21px;text-align: left;background: rgb(46,65,102);border-radius: 7px;border-width: 0px;border-left-width: 1px;box-shadow: inset -2px -2px rgba(8,20,50,0.83);filter: contrast(101%);transform: perspective(0px);" min="1" oninput="this.value = Math.abs(this.value)" onfocusout="clearinput()" id="input3" name="input3"></div>
+                        <div class="col" style="padding: 10px;"><button class="form-control" type="submit" style="box-shadow: inset -2px -2px rgba(8,20,50,0.83);background: rgb(74, 124, 186);border-radius: 10px;height: 45px;">Search</button></div>
                     </div>
                 </div>
                     <% } %>      
             <div class="scroll">
             <table>
-                <thead style="position: sticky; top: 0; background: #304051;">
+                <thead style="position: sticky; top: 0; background: #324964;">
                     <tr>
                         <% for(var j=0; j < display_data_keys.length; j++) { %>
                                     <th><%= display_data_keys[j] %></th>
@@ -48,10 +48,14 @@
                 </thead>
                     <!-- for every element in the list of jsons 
                         create a table row with it's values-->
-                    <% for(var l=0; l < display_data.length; l++ ) { %>
-                        <tr>
+                    <% for(var l=0; l < display_data.length; l++ ) { 
+                         if (!pop_up) { %>
+                            <tr id=<%= l %>>
+                        <% } else { %>
+                            <tr onmouseover="this.style.backgroundColor = '#3091ff'" onmouseout="this.style.backgroundColor = '#3091ff00'" onclick=<%= 'project_reseracher(' + display_data[l]["project_id"] + ')' %> onhover="pointer: pointer" id=<%= l %>>
+                        <% } %>
                         <% for(var k=0; k < display_data_keys.length; k++) {%>
-                            <% if (display_data_keys[k] == "start_date" || display_data_keys[k] == "end_date")  {%>
+                            <% if (display_data_keys[k] == "start_date" || display_data_keys[k] == "end_date" || display_data_keys[k] == "date_of_birth")  {%>
                                 <% if (display_data[l][display_data_keys[k]])  {%>
                                         <td><%= display_data[l][display_data_keys[k]].getDate() + '/'
                                             + (display_data[l][display_data_keys[k]].getMonth() + 1) + '/'
@@ -72,3 +76,17 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<!-- Scipt for input fields -->
+<script>
+function clearinput() {
+  var x = document.getElementById("input2");
+  var y = document.getElementById("input3");
+  if (x.value == 0) {x.value =  null};
+  if (y.value == 0) {y.value =  null};
+}
+
+function project_reseracher(project_id) {
+    window.location.href= '/proj_res?project_id=' + project_id
+}
+</script>
