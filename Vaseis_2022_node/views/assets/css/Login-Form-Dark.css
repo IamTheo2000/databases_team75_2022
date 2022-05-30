@@ -1,5 +1,5 @@
 .login-dark {
-  height: 150vh;
+  height: 200vh;
   background: #475d62 url(../../assets/img/star-sky.jpg);
   background-size: cover;
   position: relative;
@@ -9,7 +9,7 @@
   max-width: 320px;
   width: 90%;
   background-color: #1e2833;
-  padding: 40px;
+  padding: 20px;
   border-radius: 4px;
   transform: translate(-50%, -50%);
   position: absolute;

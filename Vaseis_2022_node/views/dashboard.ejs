@@ -17,27 +17,29 @@
     <section class="login-dark">
         <%- include("navbar.ejs")%>
         
-        <!-- Form tha contains some options(divs). Each one contains a header, some text and a "Go" button
-            Two use cases: sum due and reports
+        <!-- Grid-Form tha contains some options(divs). Each one contains a header, some text and a "Go" button
             When "Go" button is clicked link to corresponding page-->
         <form method="post" style="max-width: fit-content;">
             <div class="text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center">
                 <h1>Choose use case:</h1>
             </div>
             <div class="row">
-                <div class="col text-center" style="padding: 15px;">
-                    <div class="text-center" style="padding: 15px;height: 230px;background: rgb(30,52,77);border-radius: 15px;"><i class="fa fa-calendar" style="padding: 10px;"></i>
-                        <h1 style="font-size: 25px;padding: 10px;padding-bottom: 0px;">Programs</h1>
-                        <p style="color: rgba(255,255,255,0.45);font-size: 13px;padding: 10px;height: 79px;padding-top: 0px;"><br>See all available programs.<br><br></p><a href="/programs" style="font-size: 15px;">Go &gt;&gt;</a>
-                    </div>
-                </div>
-
-                <div class="col text-center" style="padding: 15px;">
-                    <div class="text-center" style="padding: 15px;height: 230px;background: rgb(30,52,77);border-radius: 15px;"><i class="fa fa-calendar" style="padding: 10px;"></i>
-                        <h1 style="font-size: 25px;padding: 10px;padding-bottom: 0px;">Projects</h1>
-                        <p style="color: rgba(255,255,255,0.45);font-size: 13px;padding: 10px;height: 79px;padding-top: 0px;"><br>See available projects.<br><br></p><a href="/projects" style="font-size: 15px;">Go &gt;&gt;</a>
-                    </div>
-                </div>
+                <%- include("card.ejs",{question: "3.1.a", header: "Programs",message: "See all available programs.",link: "/programs" }) %>
+                <%- include("card.ejs",{question: "3.1.b", header: "Projects",message: "See available projects.",link: "/projects" }) %>
+                <%- include("card.ejs",{question: "3.2.a", header: "Projects per Researcher",message: "See for every researcher the projects they are involved with.",link: "/view_one" }) %>
+            </div>
+            <div class="row">
+                <%- include("card.ejs",{question: "3.2.b", header: "Projects & Organisations per Program",message: "See which projects and organisations are involved for every program.",link: "/view_two" }) %>
+                <%- include("card.ejs",{question: "3.4", header: "Same Num of Projects", message: "See which organisations got the same number of projects in two years with more than 10 per year.", link: "/same_num_of_projects" }) %>
+            </div>
+            <div class="row">
+                <%- include("card.ejs",{question: "3.3", header: "Scientific Field",message: "Search based on scientific field",link: "/field" }) %>
+                <%- include("card.ejs",{question: "3.5", header: "Top Scientific Field Pairs", message: "See the 3 top pairs of scientific fields in projects.", link: "/top_pairs" }) %>
+                <%- include("card.ejs",{question: "3.6", header: "Young researchers", message: "See young researchers working in multiple projects.", link: "/new_res" }) %>
+            </div>
+            <div class="row">
+                <%- include("card.ejs",{question: "3.7", header: "Top Executives", message: "See top 5 executives that have given the biggest amount of founding to some company.", link: "/top_execs" }) %>
+                <%- include("card.ejs",{question: "3.8", header: "Hardworkers", message: "See the researchers working in at lesat 5 projects with no delivry work.", link: "/res_mt5" }) %>
             </div>
         </form>
     </section>

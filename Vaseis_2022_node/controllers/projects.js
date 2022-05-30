@@ -37,6 +37,7 @@ exports.getProjectsParameters = (req, res, next) => {
                 display_data_keys: [],
                 search_field: true,
                 pop_up: true,
+                options: false
             }); 
         } else {
             res.render("data.ejs", {
@@ -45,6 +46,7 @@ exports.getProjectsParameters = (req, res, next) => {
                 display_data_keys: Object.keys(rows[0]),
                 search_field: true,
                 pop_up: true,
+                options: false
             });
         }
     })

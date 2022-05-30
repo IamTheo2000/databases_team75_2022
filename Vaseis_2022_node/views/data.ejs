@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Page that loads the rsults of every query -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -18,15 +18,41 @@
     <section class="login-dark">
         <%- include("navbar.ejs")%>
 
-        <!-- form with custom width given when page was rendered -->
+        <!-- Form that can do post requests -->
         <form method="post" style="padding: 20px;max-width:fit-content;width: fit-content;margin-right: 70px;">
             <!-- back button -->
             <button class="btn btn-primary" style="margin-top: 0px;background: rgb(30,40,51)" type="button" onclick="history.back()"><i class="fa fa-arrow-left"></i> Back</button>
 
-            <!-- displayed message: Showing result for + a string given from page render -->
+            <!-- displayed message: Showing result for a string given from page render -->
             <div class="text-center">
                 <h1><%= result_string %></h1>
             </div> 
+            <!-- Selections for question 3.3 -->
+            <% if (options) { %>
+                <div class="contaier">
+                    <div class="row">
+                        <div class="col" style="padding: 10px;">
+                            <small>Select a field: </small>
+                            <select class="" name="field_input">
+                                <option>Biology</option>
+                                <option>Physics</option>
+                                <option>Mathematics</option>
+                                <option>Chemistry</option>
+                                <option>Technology</option>
+                            </select>
+                        </div>
+                        <div class="col" style="padding: 10px;">
+                            <small>Choose result type: </small>
+                            <select class="" name="project_researcher">
+                                <option>Projects</option>
+                                <option>Researchers</option>
+                            </select>
+                        </div>
+                        <div class="col" style="padding: 10px;"><button class="form-control" type="submit" style="box-shadow: inset -2px -2px rgba(8,20,50,0.83);background: rgb(74, 124, 186);border-radius: 10px;height: 45px;">Search</button></div>
+                    </div>
+                </div>
+            <% } %> 
+            <!-- Search field for question 3.1 -->
             <% if (search_field) { %>
                 <div class="contaier">
                     <div class="row">
@@ -36,9 +62,11 @@
                         <div class="col" style="padding: 10px;"><button class="form-control" type="submit" style="box-shadow: inset -2px -2px rgba(8,20,50,0.83);background: rgb(74, 124, 186);border-radius: 10px;height: 45px;">Search</button></div>
                     </div>
                 </div>
-                    <% } %>      
+                    <% } %>  
+                <!-- Scrolable div that contains a table with the results  -->
             <div class="scroll">
             <table>
+                <!-- The head of the table is the keys from result -->
                 <thead style="position: sticky; top: 0; background: #324964;">
                     <tr>
                         <% for(var j=0; j < display_data_keys.length; j++) { %>
@@ -49,12 +77,16 @@
                     <!-- for every element in the list of jsons 
                         create a table row with it's values-->
                     <% for(var l=0; l < display_data.length; l++ ) { 
+                        <!-- If question is not 3.1 table row has l as it's id -->
                          if (!pop_up) { %>
                             <tr id=<%= l %>>
+                        <!-- If question is 3.1 change color of table row when hovered and go to researchers page when clicked -->
                         <% } else { %>
                             <tr onmouseover="this.style.backgroundColor = '#3091ff'" onmouseout="this.style.backgroundColor = '#3091ff00'" onclick=<%= 'project_reseracher(' + display_data[l]["project_id"] + ')' %> onhover="pointer: pointer" id=<%= l %>>
                         <% } %>
+                        <!-- Parse the given data(rows of json) -->
                         <% for(var k=0; k < display_data_keys.length; k++) {%>
+                            <!-- If given a date cast it to be like dd/mm/yyy or "-" if null -->
                             <% if (display_data_keys[k] == "start_date" || display_data_keys[k] == "end_date" || display_data_keys[k] == "date_of_birth")  {%>
                                 <% if (display_data[l][display_data_keys[k]])  {%>
                                         <td><%= display_data[l][display_data_keys[k]].getDate() + '/'
@@ -78,6 +110,7 @@
 </html>
 
 <!-- Scipt for input fields -->
+<!-- If value is 0 (when you delete 0 defaults) make the input null -->
 <script>
 function clearinput() {
   var x = document.getElementById("input2");
@@ -86,6 +119,7 @@ function clearinput() {
   if (y.value == 0) {y.value =  null};
 }
 
+//For question 3.1 if table row is clicked get the following page with project id as parameter
 function project_reseracher(project_id) {
     window.location.href= '/proj_res?project_id=' + project_id
 }

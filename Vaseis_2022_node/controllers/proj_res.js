@@ -13,6 +13,7 @@ exports.getProj_Res = (req, res, next) => {
             display_data_keys: Object.keys(rows[0]),
             search_field: false,
             pop_up: false,
+            options: false
         });
     })
     .catch(err => console.log(err))
