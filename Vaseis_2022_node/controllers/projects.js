@@ -28,7 +28,10 @@ exports.getProjectsParameters = (req, res, next) => {
     if (!input_executive) {input_executive = 0}
     if (!input_duration) {input_duration = -1}
 
-    db.query("SELECT * FROM project WHERE ($1 = 0 OR executive_id = $1) AND ($2 = '2000-01-01'::date OR start_date = $2) AND ($3 = -1 OR (end_date IS NOT NULL AND (DATE_PART('year', AGE(end_date, start_date))*12 + DATE_PART('month', AGE(end_date, start_date)) = $3)))",[input_executive,input_date, input_duration])
+    db.query("SELECT * FROM project WHERE ($1 = 0 OR executive_id = $1) "+
+                " AND ($2 = '2000-01-01'::date OR start_date = $2)"+
+                " AND ($3 = -1 OR (end_date IS NOT NULL"+
+                " AND (DATE_PART('year', AGE(end_date, start_date))*12 + DATE_PART('month', AGE(end_date, start_date)) = $3)))",[input_executive,input_date, input_duration])
     .then(({rows, fields}) => {
         if (rows.length == 0) {
             res.render("data.ejs", {

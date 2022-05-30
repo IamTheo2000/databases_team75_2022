@@ -5,7 +5,8 @@ exports.getProj_Res = (req, res, next) => {
     if (messages.length == 0) messages = [];
 
     var project_id = req.query.project_id;
-    db.query('SELECT * FROM project_researcher, researcher WHERE (project_researcher.project_id = $1 AND project_researcher.researcher_id = researcher.researcher_id)',[project_id])
+    db.query('SELECT * FROM project_researcher, researcher'+
+    ' WHERE (project_researcher.project_id = $1 AND project_researcher.researcher_id = researcher.researcher_id)',[project_id])
     .then(({rows, fields}) => {
         res.render("data.ejs", {
             result_string: 'Researchers for project ' + project_id,
