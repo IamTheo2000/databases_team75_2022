@@ -4,7 +4,9 @@ exports.getSameNumberOfProjects = (req, res, next) => {
     let messages = req.flash('messages');
     if (messages.length == 0) messages = [];
 
-    
+    // IN THIS QUERY THE QUESTION ASKS FOR ORGANISATIONS THAT HAVE AT LEAST 10 PROJECTS PER YEAR
+    // HOWEVER BECAUSE THE QUERY WOULD BE EMPTY WE SKIPED FROM THE SUBQUERIES THE FOLLOWING
+    // HAVING COUNT(*) > 10
     db.query('SELECT jsonb_agg(DISTINCT table1.name), (table1.erga + table2.erga) AS proj_num' +
     ' FROM' +
        ' (SELECT organisation.organisation_id, organisation.name, EXTRACT(YEAR FROM project.start_date) AS etos, COUNT(*) AS erga' +
